@@ -1,4 +1,5 @@
 ﻿using System;
+using Microsoft.EntityFrameworkCore;
 
 namespace RhythmsGonnaGetYou
 {
@@ -22,10 +23,23 @@ namespace RhythmsGonnaGetYou
         public string ContactName { get; set; }
         public string ContactPhoneNumber { get; set; }
     }
+
+    class RhythmsGonnaGetYouContext : DbContext
+    {
+        public DbSet<Album> Albums { get; set; }
+        public DbSet<Band> Bands { get; set; }
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            optionsBuilder.UseNpgsql("server=localhost;database=RhythmsGonnaGetYou");
+        }
+
+    }
     class Program
     {
         static void Main(string[] args)
         {
+
         }
     }
 }
